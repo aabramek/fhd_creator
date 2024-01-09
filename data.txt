@@ -1,0 +1,21 @@
+odbiorca
+	e_mail
+	nr_tel
+nadawca
+	e_mail
+	nr_tel
+nr_przesylki
+paczkomat_odbiorcy
+	kod_paczkomatu
+	adres
+		ulica
+		nr_domu
+		kod_pocztowy
+		miejscowosc
+paczkomat_nadawca
+	kod_paczkomatu
+	adres
+		ulica
+		nr_domu
+		kod_pocztowy
+		miejscowosc
