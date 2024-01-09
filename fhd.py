@@ -50,10 +50,21 @@ def print_tree(root, depth = 0):
 		print_tree(child, depth + 1)
 	return
 
+def tree_depth(root):
+	if len(root[1]) == 0:
+		return 0
+
+	children_depths = []
+	
+	for child in root[1]:
+		children_depths.append(tree_depth(child) + 1)
+
+	return max(children_depths)
+
 if len(sys.argv) < 4:
 	print("Usage: fhd.py <system name> <data file name> <output image name>")
 	exit(1)
 
 root = load_tree_from_file(sys.argv[2], sys.argv[1])
-print_tree(root)
+print(tree_depth(root))
 
