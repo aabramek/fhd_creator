@@ -1,15 +1,9 @@
 #!python3
 
+from PIL import Image, ImageFont, ImageDraw
+
 import sys
-
-def line_indent_level(line):
-	i = 0
-	
-	while line[i] == "\t":
-		i += 1
-
-	return i
-
+import text_tools
 
 def load_tree_from_file(filename, rootname):
 	lines = []
@@ -24,7 +18,7 @@ def load_tree_from_file(filename, rootname):
 	recent_node_at_indent = [(rootname, [])]
 	
 	for line_number, line in enumerate(lines):
-		indent_level = line_indent_level(line) + 1
+		indent_level = text_tools.line_indent_level(line) + 1
 		
 		if indent_level > recent_indent_level + 1:
 			print("Line #{} has inappropriate indent level ({}), ignoring".format(line_number, indent_level), file = sys.stderr)
@@ -61,10 +55,16 @@ def tree_depth(root):
 
 	return max(children_depths)
 
-if len(sys.argv) < 4:
-	print("Usage: fhd.py <system name> <data file name> <output image name>")
+
+
+def create_node_box(node):
+
+	return
+
+if len(sys.argv) < 5:
+	print("Usage: fhd.py <system name> <font file name> <data file name> <output image name>")
 	exit(1)
 
-root = load_tree_from_file(sys.argv[2], sys.argv[1])
-print(tree_depth(root))
+root = load_tree_from_file(sys.argv[3], sys.argv[1])
 
+print(text_tools.split_text_into_lines("Ala ma kota a kot ma Ale Ala go kocha a kot ja wcale", 15))
