@@ -16,7 +16,7 @@ FONT_SIZE = 24
 MAX_LINE_CHARACTERS = 14
 LINE_WIDTH = 4
 
-def tree_image_size(root):
+def subtree_image_size(root):
 	depth = tree_depth(root)
 	height = tree_height(root)
 
@@ -24,14 +24,14 @@ def tree_image_size(root):
 		height * (RECTANGLE_HEIGHT + MARGIN_TOP) + 2 * PADDING)
 
 def create_tree_image(root, font_filename):
-	image = Image.new("1", tree_image_size(root), 1) # obiekt Image
+	image = Image.new("1", subtree_image_size(root), 1) # obiekt Image
 	context = ImageDraw.Draw(image)
 	font = ImageFont.truetype("font.ttf", FONT_SIZE)
-	draw_node(context, (PADDING, PADDING), root, font)
+	draw_subtree_node(context, (PADDING, PADDING), root, font)
 	image.show()
 	return
 
-def draw_node(draw_context, origin, node, font):
+def draw_subtree_node(draw_context, origin, node, font):
 	x0 = origin[0]
 	y0 = origin[1]
 	x1 = x0 + RECTANGLE_WIDTH
@@ -51,22 +51,22 @@ def draw_node(draw_context, origin, node, font):
 
 	num_children = len(node[1])
 
-	if num_children > 0:
-		for i, child in enumerate(node[1]):
-			draw_node(draw_context, (x0, y0), child, font)
-			if i < num_children - 1:
-				y0 = y0 + tree_height(child) * (RECTANGLE_HEIGHT + MARGIN_TOP)
+	if num_children == 0:
+		return
 
-		x0 = x1 = origin[0] + MARGIN_LEFT
-		y1 = y0 + MARGIN_TOP
-		y0 = origin[1] + RECTANGLE_HEIGHT
+	for i, child in enumerate(node[1]):
+		draw_subtree_node(draw_context, (x0, y0), child, font)
 		
-		draw_context.line([x0, y0, x1, y1], 0, LINE_WIDTH)
+		draw_context.line([x0, y0 + MARGIN_TOP, x0 - MARGIN_LEFT, 
+			y0 + MARGIN_TOP], 0, LINE_WIDTH)
+		
+		if i < num_children - 1:
+			y0 = y0 + tree_height(child) * (RECTANGLE_HEIGHT + MARGIN_TOP)
 
-	y0 = y1 = origin[1] + MARGIN_TOP
-	x0 = origin[0] - MARGIN_LEFT
-	x1 = origin[0]
-
+	x0 = x1 = origin[0] + MARGIN_LEFT
+	y1 = y0 + MARGIN_TOP
+	y0 = origin[1] + RECTANGLE_HEIGHT
+	
 	draw_context.line([x0, y0, x1, y1], 0, LINE_WIDTH)
 
 	return
