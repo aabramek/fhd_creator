@@ -39,11 +39,11 @@ def print_tree(root, depth = 0):
 		print_tree(child, depth + 1)
 	return
 
-def tree_depth(root):
+def tree_width(root):
 	depth = 0
 	
 	for child in root[1]:
-		depth = max(depth, tree_depth(child))
+		depth = max(depth, tree_width(child))
 
 	return depth + 1
 
@@ -54,3 +54,11 @@ def tree_height(root):
 		height += tree_height(child)
 
 	return height + 1
+
+def tree_width_px(root, width, margin):
+	w = tree_width(root)
+	return width + (w - 1) * 2 * margin
+
+def tree_height_px(root, height, margin):
+	h = tree_height(root)
+	return h * (height + margin) - margin

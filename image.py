@@ -1,6 +1,11 @@
-from PIL import Image, ImageFont, ImageDraw
+from PIL import (Image,
+	ImageFont,
+	ImageDraw)
 
-from tree import tree_height, tree_depth
+from tree import (tree_height,
+	tree_width,
+	tree_height_px,
+	tree_width_px)
 
 from text_tools import split_text_into_lines
 
@@ -17,11 +22,10 @@ MAX_LINE_CHARACTERS = 14
 LINE_WIDTH = 4
 
 def subtree_image_size(root):
-	depth = tree_depth(root)
-	height = tree_height(root)
+	depth = tree_width_px(root, RECTANGLE_WIDTH, MARGIN_LEFT) + 2 * PADDING
+	height = tree_height_px(root, RECTANGLE_HEIGHT, MARGIN_TOP) + 2 * PADDING
 
-	return (((depth - 1) * MARGIN_LEFT * 2 + RECTANGLE_WIDTH) + 2 * PADDING,
-		height * (RECTANGLE_HEIGHT + MARGIN_TOP) + 2 * PADDING)
+	return (depth, height)
 
 def create_tree_image(root, font_filename):
 	image = Image.new("1", subtree_image_size(root), 1) # obiekt Image
@@ -61,7 +65,8 @@ def draw_subtree_node(draw_context, origin, node, font):
 			y0 + MARGIN_TOP], 0, LINE_WIDTH)
 		
 		if i < num_children - 1:
-			y0 = y0 + tree_height(child) * (RECTANGLE_HEIGHT + MARGIN_TOP)
+			y0 = y0 + tree_height_px(child, RECTANGLE_HEIGHT, MARGIN_TOP) + \
+				MARGIN_TOP
 
 	x0 = x1 = origin[0] + MARGIN_LEFT
 	y1 = y0 + MARGIN_TOP
