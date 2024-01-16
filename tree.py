@@ -47,10 +47,10 @@ def tree_depth(root):
 
 	return depth + 1
 
-def tree_length(root):
+def tree_height(root):
 	height = 0
 
 	for child in root[1]:
-		height += tree_length(child)
+		height += tree_height(child)
 
 	return height + 1
