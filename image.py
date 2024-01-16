@@ -7,7 +7,7 @@ from tree import (tree_height,
 	tree_height_px,
 	tree_width_px)
 
-from text_tools import split_text_into_lines
+from text import split_text_into_lines
 
 RECTANGLE_WIDTH = 250
 RECTANGLE_HEIGHT = 140

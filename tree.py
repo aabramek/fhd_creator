@@ -1,4 +1,4 @@
-import text_tools
+from text import line_indent_level
 
 def load_tree_from_file(filename, rootname):
 	lines = []
@@ -13,7 +13,7 @@ def load_tree_from_file(filename, rootname):
 	recent_node_at_indent = [(rootname, [])]
 	
 	for line_number, line in enumerate(lines):
-		indent_level = text_tools.line_indent_level(line) + 1
+		indent_level = line_indent_level(line) + 1
 		
 		if indent_level > recent_indent_level + 1:
 			print("Line #{} has inappropriate indent level ({}), ignoring".format(line_number, indent_level), file = sys.stderr)
