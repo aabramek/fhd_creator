@@ -10,5 +10,5 @@ if len(sys.argv) < 4:
 
 root = tree.load_tree_from_file(sys.argv[2], sys.argv[1])
 
-image.create_tree_image(root, sys.argv[1])
+image.create_function_hierarchy_diagram(root, sys.argv[1])
 
