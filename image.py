@@ -9,19 +9,7 @@ from tree import (tree_height,
 
 from text import split_text_into_lines
 
-RECTANGLE_WIDTH = 250
-RECTANGLE_HEIGHT = 140
-MARGIN_TOP = 25
-MARGIN_LEFT = 35
-PADDING = 30
-OUTLINE_WIDTH = 5
-COLOR_FILL = 1
-COLOR_OUTLINE = 0
-COLOR_LINE = 0
-FONT_SIZE = 24
-MAX_LINE_CHARACTERS = 14
-LINE_WIDTH = 4
-SUBTREE_MARGIN = 4 * MARGIN_LEFT
+from settings import *
 
 def subtree_image_size(root):
 	depth = tree_width_px(root, RECTANGLE_WIDTH, MARGIN_LEFT) + 2 * PADDING
