@@ -17,7 +17,7 @@ def subtree_image_size(root):
 
 	return (depth, height)
 
-def create_function_hierarchy_diagram(root, font_filename):
+def create_function_hierarchy_diagram(root):
 	image_size_x = image_size_y = 0
 
 	for child in root[1]:
@@ -31,7 +31,7 @@ def create_function_hierarchy_diagram(root, font_filename):
 
 	image = Image.new("1", (image_size_x, image_size_y), 1) # obiekt Image
 	context = ImageDraw.Draw(image)
-	font = ImageFont.truetype("font.ttf", FONT_SIZE)
+	font = ImageFont.truetype(FONT_FILE_NAME, FONT_SIZE)
 
 	# prostokąt dla węzła głównego
 	root_origin_x = (image_size_x - RECTANGLE_WIDTH) / 2
@@ -83,8 +83,7 @@ def create_function_hierarchy_diagram(root, font_filename):
 	y0 = root_origin_y + RECTANGLE_HEIGHT
 	context.line([x0, y0, x1, y1], COLOR_LINE, LINE_WIDTH)
 
-	image.show()
-	return
+	return image
 
 def draw_subtree_node(draw_context, origin, node, font):
 	x0 = origin[0]
